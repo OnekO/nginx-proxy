@@ -1,13 +1,10 @@
-FROM nginx:1.13
+FROM wernight/alpine-nginx-pagespeed 
 LABEL maintainer="Jason Wilder mail@jasonwilder.com"
 
 # Install wget and install/updates certificates
-RUN apt-get update \
- && apt-get install -y -q --no-install-recommends \
-    ca-certificates \
-    wget \
- && apt-get clean \
- && rm -r /var/lib/apt/lists/*
+RUN apk upgrade --no-cache --update && \
+    apk add --no-cache --update \
+        wget 
 
 
 # Configure Nginx and apply fix for very long server names
